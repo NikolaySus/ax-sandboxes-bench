@@ -1,0 +1,8 @@
+starlette==0.41.3
+pydantic==2.10.4
+httpx==0.28.1
+pytest==8.3.4
+pdm-backend==2.4.3
+build==1.2.2.post1
+anyio==4.8.0
+dirty-equals==0.9.0

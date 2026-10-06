@@ -1,0 +1,14 @@
+{
+  "ax": "d0bc38bcf90bb2ad9c012ff1be9d68ff05347ba9",
+  "substrate": "672533541dbfcd29084e4de2475267088bda3651",
+  "go": "1.27.1",
+  "go_sha256": "63d339f0da5ab53635a56f2490a7984dfe12dfcff22ad749f63edaf590168445",
+  "kind": "v0.33.0",
+  "ko": "v0.18.0",
+  "workload_version": "v1",
+  "python_base": "python:3.13-slim@sha256:7c61056e61ac89e852de05f3dc6fa51a6dd2181797bceed46aa725dd7cb2cd3b",
+  "registry_image": "registry:3@sha256:852b3e4d378c426dda6b318fe9d9bfe8e92a0eccb9926671ec3d3ea17a196696",
+  "ko_base": "gcr.io/distroless/static-debian13@sha256:f2ea2709ac8db56323cbd7d014277f32cb572d9ea124b0076f7aafe5980678fe",
+  "ax_base": "cgr.dev/chainguard/static@sha256:c5fed92d0fda728930795cafb61192d8abc9e2f606b22996b212e0169f1d42e6",
+  "redis_image": "redis:7-alpine@sha256:858f009f9709ce576febc734aa78b8f6d624b82571f9ddb6bda4377c833b3499"
+}

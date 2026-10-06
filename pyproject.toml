@@ -1,0 +1,14 @@
+[project]
+name = "ax-sandboxes-bench"
+version = "0.1.0"
+description = "Physical RAM benchmark for local AX/Substrate gVisor sandboxes"
+requires-python = ">=3.11"
+dependencies = []
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]
+ignore = ["E501"]

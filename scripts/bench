@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+source "$(dirname "$0")/env.sh"
+cd "$BENCH_ROOT"
+exec python3 -m bench.cli "$@"

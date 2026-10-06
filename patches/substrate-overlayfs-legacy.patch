@@ -1,0 +1,37 @@
+diff --git a/internal/imagecache/bundle_linux.go b/internal/imagecache/bundle_linux.go
+index 55fd4f35..f4fa9e37 100644
+--- a/internal/imagecache/bundle_linux.go
++++ b/internal/imagecache/bundle_linux.go
+@@ -170,9 +170,30 @@ func mountOverlay(mountpoint string, lowers []string, upper, work string) error
+ 		}
+ 		return nil
+ 	}
+-	for _, lower := range lowers {
++	for i, lower := range lowers {
+ 		if err := set("lowerdir+", lower); err != nil {
+-			return err
++			// Older host kernels support fsconfig lowerdir but not lowerdir+.
++			// Only retry the first option; other EINVAL errors remain failures.
++			if i != 0 || !errors.Is(err, unix.EINVAL) {
++				return err
++			}
++			options := "lowerdir=" + strings.Join(lowers, ":")
++			for _, path := range append(append([]string{}, lowers...), upper, work) {
++				if strings.ContainsAny(path, ":,\\") {
++					return fmt.Errorf("legacy overlay cannot encode path %q", path)
++				}
++			}
++			if upper != "" {
++				options += ",upperdir=" + upper + ",workdir=" + work
++			}
++			options += ",volatile"
++			if len(options) >= os.Getpagesize() {
++				return fmt.Errorf("legacy overlay options exceed one page; use Linux 6.8 or newer")
++			}
++			if err := unix.Mount("overlay", mountpoint, "overlay", 0, options); err != nil {
++				return fmt.Errorf("legacy overlay mount: %w", err)
++			}
++			return nil
+ 		}
+ 	}
+ 	if upper != "" {

@@ -1,0 +1,14 @@
+{
+  "spec": {
+    "template": {
+      "spec": {
+        "containers": [{
+          "name": "prometheus",
+          "resources": {"requests": {"cpu": "100m", "memory": "256Mi"}, "limits": {"memory": "2Gi"}},
+          "env": [{"name": "GOMEMLIMIT", "value": "1536MiB"}],
+          "args": ["--config.file=/etc/prometheus/prometheus.yml", "--storage.tsdb.path=/prometheus", "--storage.tsdb.retention.time=2h", "--storage.tsdb.retention.size=2GB"]
+        }]
+      }
+    }
+  }
+}
